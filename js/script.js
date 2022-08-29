@@ -1,13 +1,19 @@
 function calculatePrice() {
 
-    var unitPrice, qty, price,
-        unitPriceElement = document.getElementById("unitPrice"), 
-        qtyElement = document.getElementById("qty"), 
-        priceElement = document.getElementById("price");
-    
+    var unitPrice, qty, price, 
+    rowElement = this.parentNode.parentNode,
+    unitPriceElements = rowElement.getElementsByClassName('unitPrice'),
+    unitPriceElement = unitPriceElements[0],
+    qtyElements = rowElement.getElementsByClassName('qty'),
+    qtyElement = qtyElements[0],
+    priceElements = rowElement.getElementsByClassName('price'),
+    priceElement = priceElements[0],
+
     unitPrice = unitPriceElement.innerText;
+    unitPrice = parseInt(unitPrice);
 
     qty = qtyElement.value;
+    qty = parseInt(qty);
     
     price = unitPrice * qty; 
 
@@ -16,6 +22,8 @@ function calculatePrice() {
     return 'DONE';
 }
 
-var triggerElement = document.getElementById('trigger');
+var triggerElement = document.getElementsByClassName('trigger');
 
-triggerElement.addEventListener('click', calculatePrice);
+for(i=0; i<triggerElement.length; i++) {
+    triggerElement[i].addEventListener('click', calculatePrice)
+}
